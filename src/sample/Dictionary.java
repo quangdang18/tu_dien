@@ -1,16 +1,9 @@
+package sample;
+
 public class Dictionary {
-    public String [] Words;
-
-    public void setWords() {
-        String [] words = {"aa", "bc"};
-        Words = words;
-    }
-
-    public String[] getWords() {
-        return Words;
-    }
+    Word [] words;
     public Dictionary() {
-        String [] words = {"ability","Khả năng\n" ,
+        String [] wd = {"ability","Khả năng\n" ,
                 "able","thể\n" ,
                 "accept", "chấp nhận\n" ,
                 "acceptable", "chấp nhận được\n" ,
@@ -41,7 +34,29 @@ public class Dictionary {
                 "afraid", "sợ\n" ,
                 "after", "sau\n" ,
                 "afternoon", "buổi chiều"};
-        this.Words = words;
+        words = new Word[wd.length/2];
+        for ( int i = 0; i< wd.length/2; i++) {
+            words[i] = new Word();
+        }
+        for ( int i = 0; i < wd.length/2; i++) {
+            words[i].setWord_target(wd[i * 2]);
+            words[i].setWord_explain(wd[2 * i + 1]);
+
+        }
+
+    }
+
+    public String get(String s) {
+
+        String m = "a";
+
+        for ( int i = 0; i < words.length; i++) {
+            if ( words[i].getWord_target().equals(s)) {
+                m = words[i].getWord_explain();
+                System.out.println("tim thay");
+            }
+        }
+        return m;
     }
 
 }
