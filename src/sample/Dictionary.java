@@ -46,15 +46,37 @@ public class Dictionary {
 
     }
 
-    public String get(String s) {
-
-        String m = "a";
-
-        for ( int i = 0; i < words.length; i++) {
-            if ( words[i].getWord_target().equals(s)) {
-                m = words[i].getWord_explain();
-                System.out.println("tim thay");
+    public int binarysearch(Word[] words, String s, int left, int right) {
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (s.compareTo(words[mid].getWord_target()) == 0) {
+                return mid;
             }
+            if (s.compareTo(words[mid].getWord_target()) > 0) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1;
+    }
+
+    public String get(String s) {
+        if (binarysearch(words, s, 0, words.length - 1) >= 0) {
+            return words[binarysearch(words, s, 0, words.length - 1)].getWord_explain();
+        } else {
+            return "a";
+        }
+    }
+
+
+    public String Suggest(String s) {
+        String m = "a";
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].getWord_target().substring(0, s.length()).equals(s) ) {
+                m = m + words[i].getWord_target() + "\n";
+            }
+
         }
         return m;
     }

@@ -30,6 +30,16 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        tfSearchedWord.setOnKeyTyped(event -> {
+            String newWord = tfSearchedWord.getText() + event.getCharacter();
+            System.out.println(newWord);
+            System.out.println(display.Suggest(newWord));
+
+            lvWords.getItems().addAll(display.Suggest(newWord));
+            lvWords.setItems(" ");
+
+        });
+
         btSearch.setOnMouseClicked(event -> {
             System.out.println("Search!!!");
             String searchedWord = tfSearchedWord.getText();
